@@ -3,62 +3,8 @@
 #include <iostream>
 #include <vector>
 
-namespace Config {
-    constexpr float CellSize = 100.f;
-    constexpr float LineThickness = 5.f;
-    constexpr float GridSize = (CellSize * 3.f) + (LineThickness * 2.f);
-
-    constexpr int WindowWidth = 800;
-    constexpr int WindowHeight = 600;
-
-    constexpr float GridOriginX = (WindowWidth - GridSize) / 2.f;
-    constexpr float GridOriginY = (WindowHeight - GridSize) / 2.f;
-
-    constexpr float CrossThickness = 7.f;
-    constexpr float CrossSize = CellSize * 0.8f;
-
-    constexpr float CircleRadius = (CellSize / 2.f) - 15.f;
-    constexpr float CircleThickness = 7.f;
-
-    enum Player { None = 1, X = 2, O = 3 };
-}
-
-
-
-class TicTacToeGrid : public sf::Drawable, public sf::Transformable {
-private:
-    sf::RectangleShape topline;
-    sf::RectangleShape botline;
-    sf::RectangleShape lefline;
-    sf::RectangleShape rigline;
-
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const {
-        states.transform *= getTransform();
-        target.draw(topline, states);
-        target.draw(botline, states);
-        target.draw(lefline, states);
-        target.draw(rigline, states);
-    }
-
-public:
-    TicTacToeGrid() {
-        sf::Vector2f hSize(Config::GridSize, Config::LineThickness);
-        sf::Vector2f vSize(Config::LineThickness, Config::GridSize);
-
-        topline.setSize(hSize);
-        topline.setPosition(sf::Vector2f(Config::GridOriginX, Config::GridOriginY + Config::CellSize));
-
-        botline.setSize(hSize);
-        botline.setPosition(sf::Vector2f(Config::GridOriginX, Config::GridOriginY + Config::CellSize*2 + Config::LineThickness));
-
-        lefline.setSize(vSize);
-        lefline.setPosition(sf::Vector2f(Config::GridOriginX + Config::CellSize, Config::GridOriginY));
-
-        rigline.setSize(vSize);
-        rigline.setPosition(sf::Vector2f(Config::GridOriginX + Config::CellSize * 2 + Config::LineThickness, Config::GridOriginY));
-    }
-};
-
+#include "config.hpp"
+#include "grid.hpp"
 
 class CrossShape : public sf::Drawable, public sf::Transformable {
 private:
